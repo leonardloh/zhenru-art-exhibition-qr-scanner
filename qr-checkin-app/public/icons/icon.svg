@@ -1,0 +1,33 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="64" fill="#3B82F6"/>
+  <rect x="64" y="64" width="384" height="384" rx="32" fill="white"/>
+  
+  <!-- QR Code Pattern -->
+  <rect x="96" y="96" width="96" height="96" fill="#3B82F6"/>
+  <rect x="112" y="112" width="64" height="64" fill="white"/>
+  <rect x="128" y="128" width="32" height="32" fill="#3B82F6"/>
+  
+  <rect x="320" y="96" width="96" height="96" fill="#3B82F6"/>
+  <rect x="336" y="112" width="64" height="64" fill="white"/>
+  <rect x="352" y="128" width="32" height="32" fill="#3B82F6"/>
+  
+  <rect x="96" y="320" width="96" height="96" fill="#3B82F6"/>
+  <rect x="112" y="336" width="64" height="64" fill="white"/>
+  <rect x="128" y="352" width="32" height="32" fill="#3B82F6"/>
+  
+  <!-- Data pattern -->
+  <rect x="224" y="96" width="16" height="16" fill="#3B82F6"/>
+  <rect x="256" y="96" width="16" height="16" fill="#3B82F6"/>
+  <rect x="288" y="96" width="16" height="16" fill="#3B82F6"/>
+  
+  <rect x="224" y="128" width="16" height="16" fill="#3B82F6"/>
+  <rect x="256" y="128" width="16" height="16" fill="#3B82F6"/>
+  <rect x="288" y="128" width="16" height="16" fill="#3B82F6"/>
+  
+  <rect x="224" y="160" width="16" height="16" fill="#3B82F6"/>
+  <rect x="256" y="160" width="16" height="16" fill="#3B82F6"/>
+  <rect x="288" y="160" width="16" height="16" fill="#3B82F6"/>
+  
+  <!-- Checkmark -->
+  <path d="M320 280L360 320L420 240" stroke="#10B981" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

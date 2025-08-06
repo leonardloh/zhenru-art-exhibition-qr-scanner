@@ -1,0 +1,310 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  
+  /* Mobile-first responsive breakpoints */
+  --mobile-portrait: 320px;
+  --mobile-landscape: 481px;
+  --tablet-portrait: 769px;
+  --tablet-landscape: 1025px;
+  
+  /* Touch target sizes */
+  --touch-target-min: 44px;
+  --touch-target-comfortable: 48px;
+  
+  /* Spacing scale for mobile */
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+  
+  /* Typography scale optimized for mobile */
+  --text-xs: 0.75rem;      /* 12px */
+  --text-sm: 0.875rem;     /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg: 1.125rem;     /* 18px */
+  --text-xl: 1.25rem;      /* 20px */
+  --text-2xl: 1.5rem;      /* 24px */
+  --text-3xl: 1.875rem;    /* 30px */
+  --text-4xl: 2.25rem;     /* 36px */
+  
+  /* Line heights for readability */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  
+  /* Border radius scale */
+  --radius-sm: 0.25rem;    /* 4px */
+  --radius-md: 0.5rem;     /* 8px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Base styles with mobile-first approach */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  /* Prevent zoom on input focus on iOS */
+  -webkit-text-size-adjust: 100%;
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  margin: 0;
+  padding: 0;
+  /* Prevent horizontal scroll */
+  overflow-x: hidden;
+  /* Support for safe areas on mobile devices */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Mobile-first responsive typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--text-2xl);
+}
+
+h2 {
+  font-size: var(--text-xl);
+}
+
+h3 {
+  font-size: var(--text-lg);
+}
+
+h4, h5, h6 {
+  font-size: var(--text-base);
+}
+
+/* Tablet portrait and up */
+@media (min-width: 769px) {
+  h1 {
+    font-size: var(--text-3xl);
+  }
+  
+  h2 {
+    font-size: var(--text-2xl);
+  }
+  
+  h3 {
+    font-size: var(--text-xl);
+  }
+}
+
+/* Touch-friendly interactive elements */
+button, 
+input[type="button"], 
+input[type="submit"], 
+input[type="reset"],
+.touch-target {
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+  /* Ensure adequate spacing between touch targets */
+  margin: var(--spacing-xs);
+}
+
+/* Comfortable touch targets for primary actions */
+.touch-target-comfortable {
+  min-height: var(--touch-target-comfortable);
+  min-width: var(--touch-target-comfortable);
+}
+
+/* Form inputs optimized for mobile */
+input, 
+textarea, 
+select {
+  font-size: var(--text-base);
+  /* Prevent zoom on iOS */
+  font-size: max(16px, var(--text-base));
+  line-height: var(--leading-normal);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: 1px solid #d1d5db;
+  background: white;
+  color: var(--foreground);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+  border-color: #3b82f6;
+}
+
+/* Button styles with proper touch targets */
+button {
+  font-size: var(--text-base);
+  font-weight: 500;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  /* Prevent text selection */
+  user-select: none;
+  /* Remove tap highlight on mobile */
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Primary button styles */
+.btn-primary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #2563eb;
+}
+
+.btn-primary:active {
+  background-color: #1d4ed8;
+}
+
+/* Secondary button styles */
+.btn-secondary {
+  background-color: #6b7280;
+  color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #4b5563;
+}
+
+/* Utility classes for responsive design */
+.container-mobile {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+/* Tablet portrait and up */
+@media (min-width: 769px) {
+  .container-mobile {
+    max-width: 768px;
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* Tablet landscape and up */
+@media (min-width: 1025px) {
+  .container-mobile {
+    max-width: 1024px;
+    padding: 0 var(--spacing-xl);
+  }
+}
+
+/* Safe area support for devices with notches */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Landscape orientation specific styles */
+@media (orientation: landscape) and (max-height: 500px) {
+  /* Reduce vertical spacing in landscape on small screens */
+  .landscape-compact {
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+  }
+  
+  /* Make headers smaller in landscape */
+  h1 {
+    font-size: var(--text-xl);
+  }
+  
+  h2 {
+    font-size: var(--text-lg);
+  }
+}
+
+/* Loading spinner */
+.spinner {
+  border: 2px solid #f3f4f6;
+  border-top: 2px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  button {
+    border: 2px solid currentColor;
+  }
+  
+  input, textarea, select {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+.focus-visible:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
