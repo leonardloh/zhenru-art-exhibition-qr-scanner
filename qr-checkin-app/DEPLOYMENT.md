@@ -79,7 +79,11 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 NODE_ENV=production
 NEXT_TELEMETRY_DISABLED=1
+PORT=3000
+HOSTNAME=0.0.0.0
 ```
+
+**Important**: Make sure your Supabase URL and keys are correct. The application will fall back to placeholder values if these are not set properly, causing connection failures.
 
 ### 4. Update Nginx Configuration
 
@@ -113,6 +117,30 @@ nano scripts/init-letsencrypt.sh
 # Run the deployment script
 ./scripts/deploy.sh
 ```
+
+## Local Development vs Production
+
+### Local Development
+For local testing, use the simplified Docker setup:
+
+```bash
+# Use the local development compose file
+docker-compose -f docker-compose.local.yml up --build
+
+# This will:
+# - Run Next.js in development mode
+# - Read environment variables from .env.local at runtime
+# - Enable hot reloading
+# - Access at http://localhost:3000
+```
+
+### Production Deployment
+Production uses the full setup with:
+- Nginx reverse proxy
+- SSL certificates
+- Production optimized build
+- Health monitoring
+- Security headers
 
 ## CI/CD Setup (Optional)
 
@@ -238,7 +266,26 @@ npm audit fix
    curl https://yourdomain.com/api/health
    ```
 
-3. **Docker Issues**
+   **Common cause**: Application using placeholder Supabase URL instead of real one
+   - Verify environment variables are set correctly in `.env.production`
+   - Check Docker logs: `docker-compose logs app`
+   - Look for "placeholder.supabase.co" in error messages
+
+3. **Docker Build Issues**
+   ```bash
+   # Clean build cache and rebuild
+   docker-compose down
+   docker system prune -f
+   docker-compose build --no-cache
+   docker-compose up -d
+   ```
+
+   **TypeScript errors during build**:
+   - Check for naming conflicts (e.g., `createClient` function names)
+   - Verify all imports are correct
+   - Ensure database table names match your schema
+
+4. **Docker Issues**
    ```bash
    # Restart all services
    docker-compose restart
