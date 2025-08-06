@@ -6,7 +6,7 @@
 export interface BookingRecord {
   id: number;
   created_at: string;
-  koalendar_id: string;
+  koalender_id: string;
   event_type: string;
   name: string;
   email: string;

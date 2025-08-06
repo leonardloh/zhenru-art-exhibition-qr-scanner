@@ -64,7 +64,7 @@ export default function ManualSearchDemo() {
             <div className="space-y-2 text-sm">
               <p><span className="font-medium">Name:</span> {selectedBooking.name}</p>
               <p><span className="font-medium">Email:</span> {selectedBooking.email}</p>
-              <p><span className="font-medium">ID:</span> {selectedBooking.koalendar_id}</p>
+              <p><span className="font-medium">ID:</span> {selectedBooking.koalender_id}</p>
               <p><span className="font-medium">Event:</span> {selectedBooking.event_type}</p>
               <p><span className="font-medium">Expected Guests:</span> {selectedBooking.num_guests}</p>
               <p><span className="font-medium">Status:</span> 

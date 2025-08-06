@@ -43,6 +43,11 @@ export const supabaseAdmin = supabaseServiceRoleKey
     })
   : null;
 
+// Create client function for API routes
+export function getSupabaseClient() {
+  return supabase;
+}
+
 // Connection test function
 export async function testConnection(): Promise<boolean> {
   try {

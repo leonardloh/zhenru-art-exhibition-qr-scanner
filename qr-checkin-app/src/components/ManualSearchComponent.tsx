@@ -36,7 +36,7 @@ export default function ManualSearchComponent({
   const handleSearch = useCallback(async () => {
     const trimmedTerm = searchTerm.trim();
     const validationError = validateSearchTerm(trimmedTerm);
-    
+
     if (validationError) {
       setError(validationError);
       return;
@@ -48,7 +48,7 @@ export default function ManualSearchComponent({
 
     try {
       const result = await searchBookingsByPartialId(trimmedTerm);
-      
+
       if (result.error) {
         setError(result.error.message);
         setSearchResults([]);
@@ -71,12 +71,12 @@ export default function ManualSearchComponent({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
-    
+
     // Clear error when user starts typing
     if (error) {
       setError('');
     }
-    
+
     // Clear results when search term changes
     if (searchResults.length > 0) {
       setSearchResults([]);
@@ -103,13 +103,13 @@ export default function ManualSearchComponent({
   const formatEventTime = (startAt: string, endAt: string) => {
     const start = new Date(startAt);
     const end = new Date(endAt);
-    
-    return `${start.toLocaleTimeString('en-AU', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    })} - ${end.toLocaleTimeString('en-AU', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
+
+    return `${start.toLocaleTimeString('en-AU', {
+      hour: '2-digit',
+      minute: '2-digit'
+    })} - ${end.toLocaleTimeString('en-AU', {
+      hour: '2-digit',
+      minute: '2-digit'
     })}`;
   };
 
@@ -132,11 +132,10 @@ export default function ManualSearchComponent({
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
             placeholder="Enter booking ID (min 5 chars)"
-            className={`w-full px-4 py-4 text-lg border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 touch-target-comfortable ${
-              error 
-                ? 'border-red-300 focus:border-red-500' 
-                : 'border-gray-300 focus:border-blue-500'
-            }`}
+            className={`w-full px-4 py-4 text-lg border-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 touch-target-comfortable ${error
+              ? 'border-red-300 focus:border-red-500'
+              : 'border-gray-300 focus:border-blue-500'
+              }`}
             disabled={isSearching}
             autoFocus
           />
@@ -148,7 +147,7 @@ export default function ManualSearchComponent({
             </div>
           )}
         </div>
-        
+
         {error && (
           <p className="mt-3 text-sm text-red-600 leading-relaxed" role="alert">
             {error}
@@ -172,7 +171,7 @@ export default function ManualSearchComponent({
             'Search'
           )}
         </button>
-        
+
         <button
           onClick={onCancel}
           className="px-6 py-4 border-2 border-gray-300 text-gray-700 rounded-xl font-medium text-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors touch-target-comfortable"
@@ -201,7 +200,7 @@ export default function ManualSearchComponent({
               <div className="text-sm text-gray-600 mb-6 font-medium">
                 Found {searchResults.length} booking{searchResults.length !== 1 ? 's' : ''}
               </div>
-              
+
               {searchResults.map((booking) => (
                 <div
                   key={booking.id}
@@ -221,20 +220,19 @@ export default function ManualSearchComponent({
                         {booking.name}
                       </h3>
                       <p className="text-sm text-gray-600 font-mono">
-                        ID: {booking.koalendar_id}
+                        ID: {booking.koalender_id}
                       </p>
                     </div>
                     <div className="ml-3 flex-shrink-0">
-                      <span className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full ${
-                        booking.is_attended 
-                          ? 'bg-green-100 text-green-800' 
-                          : 'bg-yellow-100 text-yellow-800'
-                      }`}>
+                      <span className={`inline-flex px-3 py-1 text-xs font-semibold rounded-full ${booking.is_attended
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-yellow-100 text-yellow-800'
+                        }`}>
                         {booking.is_attended ? 'Checked In' : 'Not Checked In'}
                       </span>
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2 text-sm text-gray-600 leading-relaxed">
                     <p>
                       <span className="font-medium text-gray-900">Event:</span> {booking.event_type}
@@ -254,7 +252,7 @@ export default function ManualSearchComponent({
                       </p>
                     )}
                   </div>
-                  
+
                   <div className="mt-4 flex justify-end">
                     <span className="text-blue-600 text-sm font-semibold flex items-center">
                       Tap to select

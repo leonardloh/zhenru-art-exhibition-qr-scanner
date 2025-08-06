@@ -106,7 +106,7 @@ export default function CheckInSuccessComponent({
             <p className={`${
               statusColor === 'green' ? 'text-green-700' : 'text-orange-700'
             } leading-relaxed`}>
-              <span className="font-semibold">Booking ID:</span> <span className="font-mono">{booking.koalendar_id}</span>
+              <span className="font-semibold">Booking ID:</span> <span className="font-mono">{booking.koalender_id}</span>
             </p>
             <p className={`${
               statusColor === 'green' ? 'text-green-700' : 'text-orange-700'

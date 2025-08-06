@@ -239,7 +239,7 @@ export default function QRScannerComponent({
           
           // Use decodeFromVideoDevice for better continuous scanning
           await codeReader.current!.decodeFromVideoDevice(
-            undefined, // Let ZXing choose the best camera
+            null, // Let ZXing choose the best camera
             videoRef.current!,
             (result, error) => {
               if (result) {

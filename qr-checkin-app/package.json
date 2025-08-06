@@ -8,7 +8,13 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "type-check": "tsc --noEmit",
+    "docker:build": "docker build -t qr-checkin-app .",
+    "docker:run": "docker run -p 3000:3000 qr-checkin-app",
+    "deploy:staging": "docker-compose -f docker-compose.yml -f docker-compose.staging.yml up -d",
+    "deploy:production": "docker-compose up -d",
+    "health-check": "curl -f http://localhost:3000/api/health || exit 1"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.53.0",
