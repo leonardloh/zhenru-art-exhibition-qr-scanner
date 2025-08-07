@@ -28,23 +28,33 @@ A record: www.yourdomain.com -> YOUR_SERVER_IP
 
 ### 3. Run Server Setup Script
 
-SSH into your server and run the setup script:
+SSH into your server and run the Docker-only setup script:
 
 ```bash
 # SSH into your server
 ssh root@YOUR_SERVER_IP
 
-# Download and run the setup script
-curl -sSL https://raw.githubusercontent.com/your-username/qr-checkin-app/main/scripts/setup-server.sh | bash
+# Download and run the Docker-only setup script
+curl -sSL https://raw.githubusercontent.com/your-username/qr-checkin-app/main/scripts/setup-server-docker.sh | bash
+
+# Or manually download and run:
+wget https://raw.githubusercontent.com/your-username/qr-checkin-app/main/scripts/setup-server-docker.sh
+chmod +x setup-server-docker.sh
+./setup-server-docker.sh
 ```
 
 This script will:
 - Install Docker and Docker Compose
-- Create a deploy user
+- Create a deploy user with Docker permissions
 - Set up firewall rules
-- Install Node.js and PM2
 - Configure log rotation
 - Set up certificate renewal cron job
+- Set up automated Docker cleanup
+
+**What's NOT installed** (since we use Docker):
+- Node.js (runs inside containers)
+- PM2 (Docker handles process management)
+- Nginx (runs inside containers)
 
 ## Application Deployment
 
@@ -118,10 +128,60 @@ nano scripts/init-letsencrypt.sh
 ./scripts/deploy.sh
 ```
 
-## Local Development vs Production
+## Deployment Options
 
-### Local Development
-For local testing, use the simplified Docker setup:
+### Option 1: Simple HTTP Deployment (No SSL)
+
+**Best for**: Internal networks, development, testing
+
+**Limitations**: QR scanner won't work (requires HTTPS for camera access)
+
+```bash
+# Simple deployment without SSL
+docker-compose -f docker-compose.simple.yml up -d
+
+# Or use the deployment script
+./scripts/deploy-simple.sh
+
+# Access at: http://YOUR_SERVER_IP
+```
+
+**Pros**:
+- Quick setup
+- No domain/DNS required
+- No SSL certificate management
+- Works with IP addresses
+
+**Cons**:
+- QR scanner feature disabled (camera requires HTTPS)
+- Less secure
+- Not suitable for public internet
+
+### Option 2: Full Production Deployment (With SSL)
+
+**Best for**: Production, public access, full QR scanner functionality
+
+```bash
+# Full deployment with SSL, Nginx, monitoring
+./scripts/deploy.sh
+
+# Access at: https://yourdomain.com
+```
+
+**Pros**:
+- Full QR scanner functionality
+- Secure HTTPS
+- Production-ready
+- Monitoring and health checks
+
+**Cons**:
+- Requires domain name
+- SSL certificate setup
+- More complex configuration
+
+### Option 3: Local Development
+
+For local testing and development:
 
 ```bash
 # Use the local development compose file
@@ -133,14 +193,6 @@ docker-compose -f docker-compose.local.yml up --build
 # - Enable hot reloading
 # - Access at http://localhost:3000
 ```
-
-### Production Deployment
-Production uses the full setup with:
-- Nginx reverse proxy
-- SSL certificates
-- Production optimized build
-- Health monitoring
-- Security headers
 
 ## CI/CD Setup (Optional)
 
